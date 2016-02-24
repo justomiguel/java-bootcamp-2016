@@ -1,7 +1,0 @@
-package ProxyPatternConnection;
-
-public class ProxyConnection {
-	RealConnection real;
-	
-	
-}

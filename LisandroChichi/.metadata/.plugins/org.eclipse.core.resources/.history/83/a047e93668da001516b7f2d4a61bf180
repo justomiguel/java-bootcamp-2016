@@ -1,5 +1,0 @@
-package BuilderConnectionDatabase;
-
-public class MySqlConnection {
-
-}

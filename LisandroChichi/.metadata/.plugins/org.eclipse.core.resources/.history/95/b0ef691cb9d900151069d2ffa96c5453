@@ -1,5 +1,0 @@
-package SingletonConnectionDatabase;
-
-public class Connection {
-
-}

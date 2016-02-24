@@ -1,7 +1,0 @@
-package BuilderConnectionDatabase;
-
-public abstract class BuilderConnection {
-
-	
-	
-}

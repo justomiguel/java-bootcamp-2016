@@ -1,5 +1,0 @@
-package AbstractFactoryConnectionPool;
-
-public class Connection {
-
-}
