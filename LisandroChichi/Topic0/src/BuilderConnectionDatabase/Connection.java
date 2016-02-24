@@ -1,20 +1,13 @@
 package BuilderConnectionDatabase;
 
 public class Connection {
-
+	Connection conn;
 	String driver;
 	String url;
 	String user;
 	String pass;
 	
-	Connection(String driver,String url, String user, String pass) {
-		// TODO Auto-generated constructor stub
-		
-		this.driver= driver;
-		this.url= url;
-		this.user=user;
-		this.pass= pass;
-	}
+
 
 	public void setDriver(String driver) {
 		this.driver = driver;
@@ -48,5 +41,8 @@ public class Connection {
 		return pass;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Driver"+ driver;
+	}
 }

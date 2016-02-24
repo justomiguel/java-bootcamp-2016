@@ -1,7 +1,16 @@
 package BuilderConnectionDatabase;
 
-public class OracleConnection extends BuilderConnection{
+public class OracleConnection implements BuilderConnection{
 
+	Connection conn;
+	
+	
+	public OracleConnection() {
+		// TODO Auto-generated constructor stub
+	conn = new Connection();
+	
+	}
+	
 	public void createDriver() {
 		// TODO Auto-generated method stub
 		conn.setDriver("oracle.jdbc.driver.OracleDriver");
@@ -26,6 +35,12 @@ public class OracleConnection extends BuilderConnection{
 		// TODO Auto-generated method stub
 		conn.setPass("pass");
 
+	}
+
+	@Override
+	public Connection getConnection() {
+		// TODO Auto-generated method stub
+		return conn;
 	}
 
 }

@@ -1,7 +1,13 @@
 package BuilderConnectionDatabase;
 
-public class MySqlConnection extends BuilderConnection{
+public class MySqlConnection implements BuilderConnection{
 
+	private Connection conn;
+	
+	public MySqlConnection() {
+		conn = new Connection();
+	}
+	
 	@Override
 	public void createDriver() {
 		// TODO Auto-generated method stub
@@ -27,6 +33,11 @@ public class MySqlConnection extends BuilderConnection{
 		// TODO Auto-generated method stub
 		conn.setPass("root");
 
+	}
+
+	@Override
+	public Connection getConnection() {
+		return conn;
 	}
 
 	

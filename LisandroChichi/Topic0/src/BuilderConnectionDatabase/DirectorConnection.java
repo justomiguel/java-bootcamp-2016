@@ -2,10 +2,12 @@ package BuilderConnectionDatabase;
 
 public class DirectorConnection {
 
-	BuilderConnection builder;
-
-	public void setBuilder(BuilderConnection builder) {
-		this.builder = builder;
+	private BuilderConnection builder = null;
+	
+	public DirectorConnection(BuilderConnection builder) {
+			this.builder = builder;
+		
+		// TODO Auto-generated constructor stub
 	}
 	
 	public Connection getConnection(){
@@ -13,7 +15,7 @@ public class DirectorConnection {
 	}
 	
 	public void constructConnection(){
-		builder.createConnection();
+		
 		builder.createDriver();
 		builder.createUrl();
 		builder.createUser();

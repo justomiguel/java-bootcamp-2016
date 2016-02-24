@@ -4,19 +4,27 @@ public class MainConnection {
 
 	public static void main(String[] args) {
 				
-		DirectorConnection director = new DirectorConnection();
 		
-		BuilderConnection connection = new OracleConnection();
+		BuilderConnection builder = new MySqlConnection();
+		DirectorConnection director = new DirectorConnection(builder);
 		
-		connection.createConnection();
-		director.setBuilder(connection);
 		
 		director.constructConnection();
 		
-		Connection completeConnection = director.getConnection();
+		Connection conn = director.getConnection();
 		
-		System.out.println("Connection Driver: "+completeConnection.getDriver() 
-				+"\nConnection Password: "+completeConnection.getPass());
+		System.out.println("Connection Driver: "+conn.driver );
+		
+		
+		BuilderConnection builder2 = new OracleConnection();
+		DirectorConnection director2 = new DirectorConnection(builder2);
+		
+		
+		director2.constructConnection();
+		
+		Connection conn2 = director2.getConnection();
+		
+		System.out.println("Connection Driver: "+conn2.driver );
 		
 	}
 	

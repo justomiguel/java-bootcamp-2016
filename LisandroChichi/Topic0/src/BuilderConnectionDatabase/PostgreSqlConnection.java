@@ -1,7 +1,16 @@
 package BuilderConnectionDatabase;
 
-public class PostgreSqlConnection extends BuilderConnection{
+public class PostgreSqlConnection implements BuilderConnection{
 
+Connection conn;
+	
+	
+	public PostgreSqlConnection() {
+		// TODO Auto-generated constructor stub
+	conn = new Connection();
+	
+	}
+	
 	@Override
 	public void createDriver() {
 		// TODO Auto-generated method stub
@@ -25,6 +34,12 @@ public class PostgreSqlConnection extends BuilderConnection{
 	public void createPass() {
 		// TODO Auto-generated method stub
 		conn.setPass("123");
+	}
+
+	@Override
+	public Connection getConnection() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
