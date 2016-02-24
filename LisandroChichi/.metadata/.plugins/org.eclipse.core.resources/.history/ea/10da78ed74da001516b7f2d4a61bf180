@@ -1,0 +1,5 @@
+package BuilderConnectionDatabase;
+
+public class MySqlConnection extends BuilderConnection{
+
+}

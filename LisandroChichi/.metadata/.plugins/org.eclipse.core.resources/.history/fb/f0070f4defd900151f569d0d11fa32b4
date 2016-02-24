@@ -1,0 +1,9 @@
+package AbstractFactoryConnectionPool;
+
+
+
+public interface ConnPoolFactory {
+
+		 ConnPoolFactory getConnection();
+
+}

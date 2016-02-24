@@ -1,0 +1,10 @@
+package ProxyPatternConnection;
+
+public interface Connection {
+
+	
+	public void dataBaseConnection();
+	
+	public void Description();
+	
+}

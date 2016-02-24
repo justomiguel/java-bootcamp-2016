@@ -1,0 +1,29 @@
+package BuilderConnectionDatabase;
+
+public class MainConnection {
+
+	public static void main(String[] args) {
+				
+		DirectorConnection director = new DirectorConnection();
+		
+		BuilderConnection mysql = new MySqlConnection();
+		BuilderConnection oracle = new OracleConnection();
+		
+		mysql.createConnection();
+		director.setBuilder(mysql);
+		
+		director.constructConnection();
+		
+		Connection completeConnection = director.getConnection();
+		
+		System.out.println(completeConnection.getDriver() +" --- "+completeConnection.getPass());
+		
+		oracle.createConnection();
+		director.setBuilder(oracle);
+		
+		
+		System.out.println(completeConnection.getDriver());
+		
+	}
+	
+}

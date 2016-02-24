@@ -1,0 +1,10 @@
+package AbstractFactoryConnectionPool;
+
+public class MySqlFactory implements ConnPoolFactory{
+
+	  @Override
+	  public ConnPool getConnection() {
+	    return new MySqlConn();
+	  }
+
+}

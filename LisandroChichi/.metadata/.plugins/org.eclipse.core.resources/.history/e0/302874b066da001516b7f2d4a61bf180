@@ -1,0 +1,26 @@
+package ProxyPatternConnection;
+
+public class RealConnection implements Connection{
+
+	@Override
+	public void dataBaseConnection() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Description() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	public void HideInformation()
+	{
+		System.out.println("this information can't be accessed");
+	}
+	
+	
+	
+	
+}

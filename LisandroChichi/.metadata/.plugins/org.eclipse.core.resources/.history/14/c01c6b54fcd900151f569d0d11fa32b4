@@ -1,0 +1,12 @@
+package AbstractFactoryConnectionPool;
+
+
+public class OracleConnFactory implements ConnPoolFactory {
+
+	@Override
+	public ConnPool getConnection() {
+		// TODO Auto-generated method stub
+		return new OracleConn();
+	}
+
+}

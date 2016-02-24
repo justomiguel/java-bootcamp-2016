@@ -1,0 +1,16 @@
+package SingletonConnectionDatabase;
+
+
+public final class ConnectionDatabase {
+	private static ConnectionDatabase instance = null;
+	 
+    private ConnectionDatabase() {
+    }
+ 
+    public static ConnectionDatabase getInstance() {
+        if (instance == null) {
+            instance = new ConnectionDatabase();
+        }
+        return instance;
+    }
+ }

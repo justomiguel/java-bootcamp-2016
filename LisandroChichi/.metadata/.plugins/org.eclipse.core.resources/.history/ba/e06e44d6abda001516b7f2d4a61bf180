@@ -1,0 +1,46 @@
+package ProxyPatternConnection;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+
+public class RealConnection implements ConnectionManager{
+
+	@Override
+	public void dataBaseConnection() {
+		System.out.println("has been connected to MySql database");
+		String url = "jdbc:mysql://localhost/tiger";
+		
+		String user ="root";
+		String password="root";
+		try {
+			Connection myConn = DriverManager.getConnection(url, user, password);
+			Statement myState = myConn.createStatement();
+			ResultSet rs = myState.executeQuery("select * FROM employees");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public void Description() {
+		System.out.println("you can access to this information");
+		
+	}
+
+	
+	public void HideInformation()
+	{
+		System.out.println("this information can't be accessed, you can die!");
+	}
+	
+	
+	
+	
+}

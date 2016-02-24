@@ -1,0 +1,20 @@
+package BuilderConnectionDatabase;
+
+public class MySqlConnection extends BuilderConnection{
+
+	public void Driver(){
+		System.out.println("");
+	}
+	
+	public void Url(){
+		System.out.println("");
+	}
+	
+	public void user(){
+		System.out.println("");
+	}
+	
+	public void pass(){
+		System.out.println("");
+	}
+}

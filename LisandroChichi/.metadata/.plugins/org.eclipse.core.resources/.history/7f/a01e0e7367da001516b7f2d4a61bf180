@@ -1,0 +1,17 @@
+package ProxyPatternConnection;
+
+public class MainConnection {
+
+	public static void main(String[] args) {
+		
+		
+		Connection proxyCon = new ProxyConnection();
+		
+		proxyCon.dataBaseConnection();
+		proxyCon.Description();
+		
+		
+	}
+	
+	
+}

@@ -1,0 +1,22 @@
+package ProxyPatternConnection;
+
+public class ProxyConnection implements Connection{
+	
+
+	RealConnection real = new RealConnection();
+	@Override
+	public void dataBaseConnection() {
+		
+		real.dataBaseConnection();
+		
+	}
+
+	@Override
+	public void Description() {
+		
+		real.Description();
+		
+	}
+	
+	
+}

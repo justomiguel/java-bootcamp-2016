@@ -1,0 +1,11 @@
+package AbstractFactoryConnectionPool;
+
+import java.sql.Connection;
+
+
+
+public interface ConnPoolFactory {
+
+		 Connection getConnection();
+
+}

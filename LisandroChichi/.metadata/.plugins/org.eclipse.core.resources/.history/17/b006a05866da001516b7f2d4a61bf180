@@ -1,0 +1,21 @@
+package ProxyPatternConnection;
+
+public class RealConnection implements Connection{
+
+	@Override
+	public void dataBaseConnection() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Description() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+	
+	
+}

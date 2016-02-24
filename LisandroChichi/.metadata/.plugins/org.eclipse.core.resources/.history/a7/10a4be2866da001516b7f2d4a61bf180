@@ -1,0 +1,8 @@
+package ProxyPatternConnection;
+
+public interface Connection {
+
+	
+	public void Description();
+	
+}
