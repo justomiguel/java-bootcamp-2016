@@ -1,20 +1,35 @@
 package topic0EJ4;
 
-public class index {
+import topic2EJ2.Blog;
+
+public class Index {
 	public static void main(String[] args) {
 
-		BDBuilder dbBuilder = new BD1Builder();
-		BDDirector dbDirector = new BDDirector(dbBuilder);
-		dbDirector.constructBD();
-		DB db = dbDirector.getDB();
-		System.out.println("Los datos de la base de datos son : " + db);
+		//HEADING
+		System.out.println("Exercise number four from Topic 0 of Java-bootcamp ");
+		System.out.println("");
+				
+		//Show a database with all attributes
+		System.out.println("TEST: A database with all attributes");
 		
-		BDBuilder dbBuilder2 = new BD2Builder();
-		BDDirector dbDirector2 = new BDDirector(dbBuilder2);
-		dbDirector2.constructBD();
-		DB db2 = dbDirector2.getDB();
-		System.out.println("Los datos de la base de datos son : " + db2);
+		BD1Builder DB1 = new BD1Builder();
+		DB db1 = new BDBuilder(DB1.getURL(), DB1.getUser(), DB1.getPass())
+				.setDescription(DB1.setDescription())
+				.build();
+		
+		System.out.println(db1);
 		
 		
+		
+		
+		//Show a database with no description
+		System.out.println("");
+		System.out.println("TEST: A database with no description");
+		BD2Builder DB2 = new BD2Builder();
+		DB db2 = new BDBuilder(DB2.getURL(), DB2.getUser(), DB2.getPass())
+				//.setDescription(DB2.setDescription())
+				.build();
+		
+		System.out.println(db2);
 	}
 }

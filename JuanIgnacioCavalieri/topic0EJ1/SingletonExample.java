@@ -5,43 +5,51 @@ public class SingletonExample  {
 	private String URL ;
 	private String User ;
 	private String Pass;
-	private static SingletonExample EstadoConexion;
+	static SingletonExample EstadoConexion;
 	
-	//Obtener estado
-	public static SingletonExample GetState (String URL, String User, String Pass){
+	//Constructor
+	private SingletonExample (String URL, String User, String Pass){
+		setURL(URL);
+		setUser(User);
+		setPass(Pass);
+	}
+		
+	//Crear conexión
+	public static SingletonExample setConnection (String URL, String User, String Pass){
+		String test;
 		if (EstadoConexion == null){
-			EstadoConexion = new SingletonExample (URL,User,Pass);
+			test = Mocks.comprobarConexion(URL, User, Pass);
+			
+			if (test.equals("Conexión exitosa")){
+				EstadoConexion = new SingletonExample (URL,User,Pass);
+			}
+			
 		}
 		
 		return EstadoConexion;
 	}
 	
-	//Constructor
-	private SingletonExample (String URL, String User, String Pass){
-		Mocks.ComprobarConexion(URL, User, Pass);
-	}
-	
-	public String GetURL (){
+	public String getURL (){
 		return URL;
 	}
 	
-	public String GetUser (){
+	public String getUser (){
 		return User;
 	}
 	
-	public String GetPass (){
+	public String getPass (){
 		return Pass;
 	}
 	
-	public void SetURL (String URL){
+	public void setURL (String URL){
 		this.URL = URL;
 	}
 	
-	public void SetUser (String User){
+	public void setUser (String User){
 		this.User = User;
 	}
 	
-	public void SetPass (String Pass){
+	public void setPass (String Pass){
 		this.Pass = Pass;
 	}
 }

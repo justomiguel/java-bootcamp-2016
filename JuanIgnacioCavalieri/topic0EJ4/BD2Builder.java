@@ -1,38 +1,31 @@
 package topic0EJ4;
 
-public class BD2Builder implements BDBuilder{
+public class BD2Builder {
 
-	private DB db;
+private BDBuilder bdBuilder;
 	
 	public BD2Builder (){
-		db = new DB();
+		bdBuilder = new BDBuilder ("http://www.database2.com", "User2", "54321");
 	}
 	
-	@Override
-	public void BuildURL() {
-		// TODO Auto-generated method stub
-		db.SetURL("http://www.database2.com");
-		
+	public String setDescription (){
+		return("A little description for Database 2") ;
 	}
-
-	@Override
-	public void BuildUser() {
-		// TODO Auto-generated method stub
-		db.SetUser("User2");
-		
+	
+	public String getDB (){
+		return bdBuilder.toString();
 	}
-
-	@Override
-	public void BuildPass() {
-		// TODO Auto-generated method stub
-		db.SetPass("54321");
-		
+	
+	public String getURL () {
+		return bdBuilder.getURL();
 	}
-
-	@Override
-	public DB GetDB() {
-		// TODO Auto-generated method stub
-		return db;
+	
+	public String getUser () {
+		return bdBuilder.getUser();
+	}
+	
+	public String getPass () {
+		return bdBuilder.getPass();
 	}
 
 }

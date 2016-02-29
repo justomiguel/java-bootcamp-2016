@@ -2,10 +2,10 @@ package topic0EJ3;
 
 import java.util.Date;
 
-public class proxy {
+public class Proxy {
 	DataBaseSecond BD2;
 
-	public proxy() {
+	public Proxy() {
 		System.out.println("Creating proxy at " + new Date());
 	}
 

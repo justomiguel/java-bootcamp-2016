@@ -4,7 +4,7 @@ import java.util.Date;
 
 public abstract class DataBase {
 	
-	public static Date ShowDate () {
+	public static Date showDate () {
 		return(new Date());
 	}
 }

@@ -1,9 +1,9 @@
 package topic0EJ3;
 
-public class index {
+public class Index {
 	public static void main(String[] args) {
 
-		proxy Proxy = new proxy();
+		Proxy Proxy = new Proxy();
 		DataBaseFirst DB1 = new DataBaseFirst();
 		Proxy.show();
 

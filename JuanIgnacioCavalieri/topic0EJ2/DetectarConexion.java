@@ -1,13 +1,13 @@
 package topic0EJ2;
 
 public class DetectarConexion {
-	public static FactoryExample GetTipo (String Tipo){
+	public static FactoryExample getTipo (String Tipo){
 
-		if (Tipo == "MySQL"){
+		if (Tipo.equals("MySQL")){
 			return new MySQL();
-		}else if (Tipo == "Oracle"){
+		}else if (Tipo.equals("Oracle")){
 			return new Oracle();
-		}else if (Tipo == "PostgresSQL"){
+		}else if (Tipo.equals("PostgresSQL")){
 			return new PostgresSQL();
 		}else{
 			return null;

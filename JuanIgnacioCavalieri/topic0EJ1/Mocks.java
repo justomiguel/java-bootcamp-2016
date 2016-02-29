@@ -2,7 +2,9 @@ package topic0EJ1;
 
 public class Mocks  {
 	
-	public static void ComprobarConexion (String URL, String User, String Pass) {
+	private static String Msj;
+
+	public static String comprobarConexion (String URL, String User, String Pass) {
 
 		//Control URL
 		if (URL == "http://www.testurl.com"){
@@ -12,18 +14,31 @@ public class Mocks  {
 						
 				//Control PASS
 				if (Pass == "12345"){
-					System.out.println("Conexión exitosa");
+					Msj = "Conexión exitosa";
 				}else{
-					System.out.println("Error en contraseña");
+					Msj = "Error en contraseña";
 				}//end control pass
 						
 			}else{
-				System.out.println("Error en el nombre de usuario");
+				Msj = "Error en el nombre de usuario";
 			}//end control user
 					
 		}else{
-			System.out.println("Error en la dirección URL");
+			Msj = "Error en la dirección URL";
 		}//end control conectar
+		
+		return Msj;
 	}
+	
+		public static String getConnection (){
+			String msj;
+			if (SingletonExample.EstadoConexion == null){
+				msj = "The connection has not been created";
+			}else{
+				msj = "The connection has been created. Parameters: URL: " + SingletonExample.EstadoConexion.getURL() + ", USER: " + SingletonExample.EstadoConexion.getUser() + ", PASS: " + SingletonExample.EstadoConexion.getPass();
+			}
+				
+			return msj;
+		}
 	
 }
