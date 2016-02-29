@@ -1,45 +1,42 @@
 package BuilderConnectionDatabase;
 
-public class PostgreSqlConnection implements BuilderConnection{
+import BuilderConnectionDatabase.Connection.BuilderConnection;
 
-Connection conn;
-	
-	
+public class PostgreSqlConnection{
+
+	BuilderConnection conn;
+
 	public PostgreSqlConnection() {
 		// TODO Auto-generated constructor stub
-	conn = new Connection();
+		conn = new BuilderConnection();
+
+	}
+
+	public String createDriver() {
+		// TODO Auto-generated method stub
+		return("org.postgresql.Driver");
+	}
+
+	public String createUrl() {
+		// TODO Auto-generated method stub
+		return("jdbc:postgresql://localhost:5432/testdb");
+
+	}
+
+	public String createUser() {
+		// TODO Auto-generated method stub
+		return("postgres");
+	}
+
+	public String createPass() {
+		// TODO Auto-generated method stub
+		return("123");
+	}
 	
-	}
-	
-	@Override
-	public void createDriver() {
+	public BuilderConnection getConnection() {
 		// TODO Auto-generated method stub
-		conn.setDriver("org.postgresql.Driver");
+		return conn;
 	}
 
-	@Override
-	public void createUrl() {
-		// TODO Auto-generated method stub
-		conn.setUrl("jdbc:postgresql://localhost:5432/testdb");
-		
-	}
-
-	@Override
-	public void createUser() {
-		// TODO Auto-generated method stub
-		conn.setUser("postgres");
-	}
-
-	@Override
-	public void createPass() {
-		// TODO Auto-generated method stub
-		conn.setPass("123");
-	}
-
-	@Override
-	public Connection getConnection() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

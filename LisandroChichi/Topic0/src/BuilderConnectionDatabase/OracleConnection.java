@@ -1,44 +1,41 @@
 package BuilderConnectionDatabase;
 
-public class OracleConnection implements BuilderConnection{
+import BuilderConnectionDatabase.Connection.BuilderConnection;
 
-	Connection conn;
-	
-	
+public class OracleConnection {
+
+	private BuilderConnection conn;
+
 	public OracleConnection() {
 		// TODO Auto-generated constructor stub
-	conn = new Connection();
-	
+		conn = new BuilderConnection();
+
 	}
-	
-	public void createDriver() {
+
+	public String createDriver() {
 		// TODO Auto-generated method stub
-		conn.setDriver("oracle.jdbc.driver.OracleDriver");
+		return("oracle.jdbc.driver.OracleDriver");
 	}
 
-	@Override
-	public void createUrl() {
+	public String createUrl() {
 		// TODO Auto-generated method stub
-		conn.setUrl("jdbc:oracle:thin:@localhost:1521:scorpian");
+		return("jdbc:oracle:thin:@localhost:1521:scorpian");
 
 	}
 
-	@Override
-	public void createUser() {
+	public String createUser() {
 		// TODO Auto-generated method stub
-		conn.setUser("userName");
+		return("userName");
 
 	}
 
-	@Override
-	public void createPass() {
+	public String createPass() {
 		// TODO Auto-generated method stub
-		conn.setPass("pass");
+		return("pass");
 
 	}
 
-	@Override
-	public Connection getConnection() {
+	public BuilderConnection getConnection() {
 		// TODO Auto-generated method stub
 		return conn;
 	}

@@ -1,5 +1,4 @@
 package SingletonConnectionDatabase;
-
 public final class ConnectionDatabase {
 	private static ConnectionDatabase instance = null;
 

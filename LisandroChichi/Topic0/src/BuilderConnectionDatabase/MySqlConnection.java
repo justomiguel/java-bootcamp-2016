@@ -1,42 +1,39 @@
 package BuilderConnectionDatabase;
 
-public class MySqlConnection implements BuilderConnection{
+import BuilderConnectionDatabase.Connection.BuilderConnection;
 
-	private Connection conn;
+public class MySqlConnection{
+
+	private BuilderConnection conn;
 	
 	public MySqlConnection() {
-		conn = new Connection();
+		conn = new BuilderConnection();
 	}
 	
-	@Override
-	public void createDriver() {
+	public String createDriver() {
 		// TODO Auto-generated method stub
-		conn.setDriver("org.gjt.mm.mysql.Driver");	
+		return("org.gjt.mm.mysql.Driver");	
 	}
 
-	@Override
-	public void createUrl() {
+	public String createUrl() {
 		// TODO Auto-generated method stub
-		conn.setUrl("jdbc:mysql://localhost/tiger");
-
-	}
-
-	@Override
-	public void createUser() {
-		// TODO Auto-generated method stub
-		conn.setUser("root");
+		return("jdbc:mysql://localhost/tiger");
 
 	}
 
-	@Override
-	public void createPass() {
+	public String createUser() {
 		// TODO Auto-generated method stub
-		conn.setPass("root");
+		return("root");
 
 	}
 
-	@Override
-	public Connection getConnection() {
+	public String createPass() {
+		// TODO Auto-generated method stub
+		return("root");
+
+	}
+
+	public BuilderConnection getConnection() {
 		return conn;
 	}
 

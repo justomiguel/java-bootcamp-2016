@@ -2,7 +2,6 @@ package SingletonConnectionDatabase;
 
 public class Main {
 
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		// many instances but only works one

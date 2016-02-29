@@ -1,48 +1,53 @@
 package BuilderConnectionDatabase;
 
 public class Connection {
-	Connection conn;
-	String driver;
-	String url;
-	String user;
-	String pass;
+	private final String driver;
+	private final String url;
+	private final String user;
+	private final String pass;
+
 	
-
-
-	public void setDriver(String driver) {
-		this.driver = driver;
+	public Connection(BuilderConnection buider) {
+		this.driver = buider.driver;
+		this.url = buider.url;
+		this.user = buider.user;
+		this.pass = buider.pass;
 	}
+	public static class BuilderConnection {
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+		private  String driver;
+		private  String url;
+		private  String user;
+		private  String pass;
+		
+		
+		public BuilderConnection createDriver(String driver) {
+			this.driver = driver;
+			return this;
+		};
 
-	public void setUser(String user) {
-		this.user = user;
-	}
+		public BuilderConnection createUrl(String url) {
+			this.url = url;
+			return this;
+		};
 
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
+		public BuilderConnection createUser(String user) {
+			this.user = user;
+			return this;
+		};
 
-	public String getDriver() {
-		return driver;
-	}
+		public BuilderConnection createPass(String pass) {
+			this.pass = pass;
+			return this;
+		}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public String getUser() {
-		return user;
-	}
-
-	public String getPass() {
-		return pass;
+		public Connection build() {
+			return new Connection(this);
+		}
 	}
 	
 	@Override
 	public String toString() {
-		return "Driver"+ driver;
+		return "Driver: " + driver + " - Url: " + url + " - User: " + user + " - Pass: " + pass;
 	}
 }
