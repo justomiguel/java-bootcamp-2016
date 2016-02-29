@@ -1,15 +1,14 @@
-package topic0.Exercise4;
+package lala;
+
 
 public class Test {
 
 	public static void main(String[] args) {
-		ConnectionBuilder connBuilder = new PostgreBuilder();
-		ConnectionDirector director = new ConnectionDirector(connBuilder);
+		Connection var = new Connection.ConnectionBuilder("dri", 8080, "mysql", "xfiles")
+				.password("passwordfalsa123")
+				.buildConnection();
 		
-		director.buildConnection();
-		Connection conn = director.getConnection();
-		
-		System.out.println(conn.getDatabase());
+		System.out.println(var.getDatabase());
 	}
 
 }

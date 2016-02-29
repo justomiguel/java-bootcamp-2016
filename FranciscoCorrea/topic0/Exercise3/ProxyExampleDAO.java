@@ -2,7 +2,7 @@ package topic0.Exercise3;
 
 public class ProxyExampleDAO implements ExampleDAO {
 	
-	private ExampleDAOImplementation realImplementation;
+	private ExampleDAOImplementation proxifiedDAO;
 	
 	
 	@Override
