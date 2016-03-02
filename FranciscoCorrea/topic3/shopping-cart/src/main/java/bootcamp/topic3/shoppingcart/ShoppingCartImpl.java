@@ -3,6 +3,11 @@ package bootcamp.topic3.shoppingcart;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Interface shopping cart's implementation 
+ * @author Correa Franciscp
+ * @version 0.1
+ */
 public class ShoppingCartImpl implements ShoppingCart {
 
 	private List<Product> products;
