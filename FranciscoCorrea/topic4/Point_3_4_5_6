@@ -5,8 +5,8 @@ FROM course AS c
 INNER JOIN teacher AS t ON c.assigned_teacher = t.id 
 INNER JOIN student_by_course AS st_c ON c.id = st_c.course
 INNER JOIN student AS st ON st_c.student = st.registration_number
-WHERE c.id = ?; # Indicar que curso quiere verse
-ORDER BY st.last_name ASC
+WHERE c.id = ? # Indicar que curso quiere verse
+ORDER BY st.last_name ASC;
 
 
 SELECT HIGH_PRIORITY concat(round(7*100/count(student)),"%") AS "Percentage of passed students"
