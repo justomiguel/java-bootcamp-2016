@@ -172,7 +172,10 @@ INSERT low_priority INTO `student_course`
 (30,17,3,10,7,4,7);
 
 #List students and teachers for a given course
-select high_priority t.first_name, t.last_name, s.first_name, s.last_name, c.name_course
+
+select high_priority concat("Course: ", c.name_course) as Course,
+ concat('Teacher: ', t.last_name, ', ', t.first_name) as Teacher, 
+ +	concat(s.last_name, ", ",s.first_name) as Students
 from student s, teacher t, course c
 where  teacher_assigned = 2 and t.id_teacher = c.teacher_assigned
 order by s.last_name;
