@@ -1,4 +1,6 @@
-package shopingCart;
+package service;
+
+import product.Product;
 
 public class ShoppingCartProxy implements ShoppingCartService{
 	
@@ -13,9 +15,9 @@ public class ShoppingCartProxy implements ShoppingCartService{
 		return service.addProduct(product);
 	}
 
-	public Boolean updateProduct(String oldName,String newName,double price) {
+	public void updateProduct(String oldName,String newName,double price) {
 
-		return service.updateProduct(oldName,newName,price);
+		service.updateProduct(oldName,newName,price);
 	}
 
 	public Boolean deleteProduct(String name,int qty) {

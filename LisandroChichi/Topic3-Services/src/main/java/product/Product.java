@@ -1,4 +1,4 @@
-package shopingCart;
+package product;
 
 public class Product {
 	

@@ -1,6 +1,8 @@
-package shopingCart;
+package service;
 
 import java.util.ArrayList;
+
+import product.Product;
 
 public class ShoppingCartImp implements ShoppingCartService {
 
@@ -23,6 +25,7 @@ public class ShoppingCartImp implements ShoppingCartService {
 	}
 
 	public Boolean deleteProduct(String name, int qty) {
+		try{
 		for (int i = 0; i < listProducts.size(); i++) {
 			if (listProducts.get(i).getName().equals(name)) {
 				listProducts.get(i).setQty(listProducts.get(i).getQty() - qty);
@@ -32,8 +35,10 @@ public class ShoppingCartImp implements ShoppingCartService {
 				return true;
 			}
 		}
+		}catch(Exception e){
+			System.out.println("no existe dato para eliminar");
+		}
 		return false;
-
 	}
 
 	public Product searchProducts(String name) {
@@ -46,27 +51,28 @@ public class ShoppingCartImp implements ShoppingCartService {
 			}
 		}
 		return seach;
-		
 
 	}
 
-	public Boolean updateProduct(String oldName, String newName, double price) {
-		for (int i = 0; i < listProducts.size(); i++) {
-			if (listProducts.get(i).getName() == oldName) {
-				listProducts.get(i).setName(newName);
-				listProducts.get(i).setPrice(price);
-			} else {
-				return false;
+	public void updateProduct(String oldName, String newName, double price) {
+		try {
+			for (int i = 0; i < listProducts.size(); i++) {
+				if (listProducts.get(i).getName() == oldName) {
+					listProducts.get(i).setName(newName);
+					listProducts.get(i).setPrice(price);
+				}
 			}
+		} catch (Exception e) {
+			System.out.println("error al ingresar los datos");
 		}
-		return true;
 
 	}
 
 	public double calculatePrice() {
-		double total =0;
+		double total = 0;
 		for (int i = 0; i < listProducts.size(); i++) {
-			total += listProducts.get(i).getPrice() * listProducts.get(i).getQty();
+			total += listProducts.get(i).getPrice()
+					* listProducts.get(i).getQty();
 		}
 		return total;
 	}

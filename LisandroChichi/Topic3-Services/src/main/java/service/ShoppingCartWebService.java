@@ -1,4 +1,6 @@
-package shopingCart;
+package service;
+
+import product.Product;
 
 public class ShoppingCartWebService implements ShoppingCartService{
 	
@@ -19,10 +21,9 @@ public class ShoppingCartWebService implements ShoppingCartService{
 		return true;
 	}
 
-	public Boolean updateProduct(String oldName, String newName, double price) {
+	public void updateProduct(String oldName, String newName, double price) {
 		// TODO Auto-generated method stub
 		service.updateProduct(oldName, newName, price);
-		return true;
 	}
 
 	public Product searchProducts(String name) {

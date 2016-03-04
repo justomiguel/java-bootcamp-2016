@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import shopingCart.Product;
-import shopingCart.ShoppingCartImp;
-import shopingCart.ShoppingCartProxy;
-import shopingCart.ShoppingCartWebService;
+import product.Product;
+import service.ShoppingCartImp;
+import service.ShoppingCartProxy;
+import service.ShoppingCartWebService;
 
 public class ShoppingCartTest {
 
@@ -46,9 +46,8 @@ public class ShoppingCartTest {
 	public void updateProduct(){
 		ShoppingCartImp shopping = new ShoppingCartImp();
 		shopping.addProduct(new Product("Milk",50.00,1));
-		Boolean update = shopping.updateProduct("Milk", "Chocolate", 30.00);
-		assertTrue(update);
-		shopping.searchProducts("Chocolate");
+		shopping.updateProduct("Milk", "Chocolate", 30.00);
+		assertTrue("Chocolate".equals(shopping.searchProducts("Chocolate").getName()));
 	}
 
 }
