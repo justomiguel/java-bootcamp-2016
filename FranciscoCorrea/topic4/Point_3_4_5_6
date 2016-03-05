@@ -8,10 +8,10 @@ INNER JOIN student AS st ON st_c.student = st.registration_number
 WHERE c.id = ? # Indicar que curso quiere verse
 ORDER BY st.last_name ASC;
 
-
-SELECT HIGH_PRIORITY concat(round(7*100/count(student)),"%") AS "Percentage of passed students"
+SELECT HIGH_PRIORITY count(student) as "Total passed", 
+		count(*) /  (SELECT count(student) from student_by_course where course = 3) * 100 as "Percentage"
 FROM student_by_course
-WHERE course = ?; # Indicar que curso quiere verse
+WHERE course = 3 AND final_note >= 4;
 
 
 SELECT HIGH_PRIORITY t.last_name, t.first_name, sch.day, sch.hour_in, sch.hour_out, c.name
