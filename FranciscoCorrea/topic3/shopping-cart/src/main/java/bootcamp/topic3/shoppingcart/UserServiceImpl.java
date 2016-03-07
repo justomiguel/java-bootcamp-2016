@@ -4,7 +4,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService{
 
-	private FakeUserDAO dao;
+	private UserDAO dao;
 	
 	protected UserServiceImpl() {
 		this.dao = new FakeUserDAO();

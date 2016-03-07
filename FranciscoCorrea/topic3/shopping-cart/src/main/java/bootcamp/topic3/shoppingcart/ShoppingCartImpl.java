@@ -38,5 +38,14 @@ public class ShoppingCartImpl implements ShoppingCart {
 	public List<Product> checkMyCart() {
 		return this.products;
 	}
+	
+	@Override
+	public double checkTotal() {
+		double total = 0;
+		for (int i = 0; i < this.products.size(); i++) {
+			total = total + this.products.get(i).getPrice();
+		}
+		return total;
+	}
 
 }

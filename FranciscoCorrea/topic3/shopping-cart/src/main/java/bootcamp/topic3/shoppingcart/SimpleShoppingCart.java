@@ -26,5 +26,10 @@ public class SimpleShoppingCart implements ShoppingCart {
 	public List<Product> checkMyCart() {
 		return implementation.checkMyCart();
 	}
+	
+	@Override
+	public double checkTotal() {
+		return implementation.checkTotal();
+	}
 
 }

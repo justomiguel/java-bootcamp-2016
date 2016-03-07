@@ -30,4 +30,10 @@ public interface ShoppingCart {
 	 * @return List<Product>
 	 */
 	public List<Product> checkMyCart();
+	
+	/**
+	 * Check the total price about the products in the cart
+	 * @return double
+	 */
+	public double checkTotal();
 }
