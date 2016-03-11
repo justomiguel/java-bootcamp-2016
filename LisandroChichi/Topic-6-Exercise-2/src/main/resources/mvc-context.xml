@@ -1,0 +1,6 @@
+<!-- the path where the swagger.properties file can be found-->
+<context:property-placeholder location="classpath:src/main/resources/swagger.properties">
+ 
+    <!-- creates a controller at /api-docs from this uri, which serves swagger's raw documentation in JSON format. -->
+    <bean id="documentationConfig" class="com.mangofactory.swagger.configuration.DocumentationConfig"></bean>
+</context:property-placeholder>
