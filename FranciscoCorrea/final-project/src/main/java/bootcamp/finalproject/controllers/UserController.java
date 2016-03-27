@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import bootcamp.finalproject.entities.User;
-import bootcamp.finalproject.repositories.UserRepository;
+import bootcamp.finalproject.services.UserService;
 
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,11 +24,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class UserController {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<User> add(@RequestBody User user) {
-		User r = this.userRepository.save(user);
+		User r = this.userService.saveUser(user);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ServletUriComponentsBuilder
 				.fromCurrentRequest().path("/{id}")
@@ -38,9 +38,8 @@ public class UserController {
 	
 	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public User get(@PathVariable long id) {
-		return this.userRepository.findOne(id);
+		return this.userService.findById(id);
 	}
-	
 	
 	@RequestMapping(value = "/test",method = RequestMethod.GET)
 	public Object getAuthUser() {
@@ -49,7 +48,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
 	public ResponseEntity<User> update(@PathVariable long id, @RequestBody User input) {
-		User old = this.userRepository.findOne(id);
+		User old = this.userService.findById(id);
 		
 		if(old != null) {
 			old.setFirstName(input.getFirstName());
@@ -58,7 +57,7 @@ public class UserController {
 			old.setPassword(input.getPassword());
 			old.setPhone(input.getPhone());
 			old.setEmail(input.getEmail());
-			this.userRepository.save(old);
+			this.userService.updateUser(old);
 			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
@@ -68,8 +67,7 @@ public class UserController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void update(@PathVariable long id) {
-		this.userRepository.delete(id);
+		this.userService.deleteUser(id);
 	}
-	
 	
 }

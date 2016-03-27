@@ -1,6 +1,7 @@
 package bootcamp.finalproject.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import bootcamp.finalproject.repositories.ProductRepository;
+import bootcamp.finalproject.services.ProductService;
 import bootcamp.finalproject.entities.Product;
 
 
@@ -24,21 +25,21 @@ import bootcamp.finalproject.entities.Product;
 public class ProductController {
 	
 	@Autowired
-	ProductRepository productReposirory;
+	ProductService productService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Product> findProductsByName(@RequestParam(value = "name") String name) {
-		return productReposirory.findByNameStartingWith(name);
+		return productService.searchByName(name);
 	}
 	
 	@RequestMapping(value = "/category", method = RequestMethod.GET)
 	public List<Product> findProductsByCategory(@RequestParam(value = "name") String categoryName) {
-		return productReposirory.findByCategoryName(categoryName);
+		return productService.findByCategoryName(categoryName);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-		Product p = this.productReposirory.save(product);
+		Product p = this.productService.saveProduct(product);
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.setLocation(ServletUriComponentsBuilder
 				.fromCurrentRequest().path("/{id}")
@@ -48,13 +49,14 @@ public class ProductController {
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
 	public ResponseEntity<?> update(@PathVariable long id, @RequestBody Product input) {
-		Product old = this.productReposirory.findOne(id);
-		if(old != null) {
-			old.setCategory(input.getCategory());
-			old.setName(input.getName());
-			old.setDescription(input.getDescription());
-			old.setPrice(input.getPrice());
-			this.productReposirory.save(old);
+		Optional<Product> old = this.productService.findById(id);
+		if(old.isPresent()) {
+			Product toUpdate = old.get();
+			toUpdate.setCategory(input.getCategory());
+			toUpdate.setName(input.getName());
+			toUpdate.setDescription(input.getDescription());
+			toUpdate.setPrice(input.getPrice());
+			this.productService.updateProduct(toUpdate);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -63,7 +65,7 @@ public class ProductController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable long id) {
-		this.productReposirory.delete(id);
+		this.productService.deleteProduct(id);
 	}
 	
 }

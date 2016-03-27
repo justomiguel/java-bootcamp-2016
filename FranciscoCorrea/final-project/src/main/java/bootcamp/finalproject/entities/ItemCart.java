@@ -30,7 +30,7 @@ public class ItemCart {
 	@JoinColumn(name = "productId", nullable = false, insertable = false, updatable = false)
 	private Product product;
 	
-	protected ItemCart() {}
+	public ItemCart() {}
 		
 	public long getCartId() {
 		return cartId;

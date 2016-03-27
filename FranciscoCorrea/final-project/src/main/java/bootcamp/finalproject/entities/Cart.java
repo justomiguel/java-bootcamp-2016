@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -15,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 
 
@@ -26,9 +24,6 @@ public class Cart {
 	public enum CartStatus {
 		CHECKOUT, CURRENT
 	}
-	
-	@PersistenceContext
-	EntityManager em;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,7 +50,7 @@ public class Cart {
 		this.user = user;
 		this.cartStatus = status;
 	}
-	
+	/*
 	public void addProduct(Product product, int amount) {
 		ItemCart itemCart = findProduct(product);
 		itemCart.setProduct(product);
@@ -68,10 +63,14 @@ public class Cart {
 		this.products.add(itemCart);
 		product.getCart().add(itemCart);
 	}
-	
-	public void deleteProduct(Product product) {
-		this.products.remove(findProduct(product));
+
+	public ItemCart getProduct(Product product) {
+		return null;
 	}
+
+	public void deleteProduct(Product product) {
+		
+	}*/
 
 	public long getCartId() {
 		return cartId;
@@ -83,10 +82,6 @@ public class Cart {
 	
 	public Set<ItemCart> getProducts() {
 		return this.products;
-	}
-	
-	public ItemCart getProduct(Product product) {
-		return findProduct(product);
 	}
 
 	public void setUser(User user) {
@@ -107,18 +102,6 @@ public class Cart {
 
 	public void setPayOrder(PayOrder payOrder) {
 		this.payOrder = payOrder;
-	}
-	
-	private ItemCart findProduct(Product product) {
-		if(!(this.products.size() == 0)) {
-			for (ItemCart itemCart : this.products) {
-				if(itemCart.getProduct().equals(product)) {
-					return itemCart;
-				}
-			}
-		}
-		
-		return new ItemCart();
 	}
 	
 }

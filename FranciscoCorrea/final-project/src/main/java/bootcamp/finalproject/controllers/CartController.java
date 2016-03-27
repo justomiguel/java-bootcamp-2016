@@ -23,25 +23,17 @@ import bootcamp.finalproject.repositories.PayOrderRepository;
 import bootcamp.finalproject.repositories.ProductRepository;
 import bootcamp.finalproject.repositories.StockRepository;
 import bootcamp.finalproject.repositories.UserRepository;
+import bootcamp.finalproject.services.CartService;
+import bootcamp.finalproject.services.ProductService;
+import bootcamp.finalproject.services.StockService;
 
 @RequestMapping("/cart")
 @RestController
-public class CartController {
+public class CartController {/*
 
-	@Autowired 
-	private CartRepository cartRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
-	private PayOrderRepository payOrderRepository;
-	
-	@Autowired
-	private StockRepository stockRepository;
-	
-	@Autowired
-	private ProductRepository productRepository;
+	@Autowired CartService cartService;
+	@Autowired ProductService productService;
+	@Autowired StockService stockService;
 	
 	
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.POST)
@@ -108,36 +100,7 @@ public class CartController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public Set<ItemCart> seeCart() {
-		Cart cart = getCart();
+		Cart cart = cartService.getCart();
 		return cart.getProducts();
 	}
-	
-	private Cart getCart() {
-		org.springframework.security.core.userdetails.User authUser = 
-				(org.springframework.security.core.userdetails.User) 
-				SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-		Optional<Cart> cart = cartRepository.findByUserNickNameAndCartStatus(
-				authUser.getUsername(), Cart.CartStatus.CURRENT);
-		if(!cart.isPresent()) {
-			return new Cart(userRepository.findByNickName(authUser.getUsername()), Cart.CartStatus.CURRENT);
-		}
-		return cart.get();
-	}
-	
-	private boolean existsStock(long productId, int amount) {
-		Stock stock = stockRepository.findByProductProductIdAndState(productId, Stock.State.PUBLISHED);
-		return stock.getAmount() - amount >= 0; 
-	}
-	
-	private void recalculateStock(long productId, int amount, boolean subtraction) {
-		Stock stock = stockRepository.findByProductProductIdAndState(productId, Stock.State.PUBLISHED);
-		int currentStock = stock.getAmount();
-		if(subtraction) {
-			stock.setAmount(currentStock - amount);
-		} else {
-			stock.setAmount(currentStock + amount);
-		}
-		stockRepository.save(stock);
-	}
-}
+*/}
