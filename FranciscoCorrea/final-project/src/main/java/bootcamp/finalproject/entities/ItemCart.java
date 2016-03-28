@@ -1,51 +1,41 @@
 package bootcamp.finalproject.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "item_cart")
-@IdClass(ItemCartId.class)
 public class ItemCart {
 	
 	@Id
-	private long cartId;
-	
-	@Id
-	private long productId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long itemCartId;
 	
 	@Column(name = "amount", nullable = false)
 	private int amount = 0;
 
-	@ManyToOne
-	@JoinColumn(name = "cartId", nullable = false, insertable = false, updatable = false)
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cart_id", nullable = false)
+	@JsonBackReference
 	private Cart cart;
 	
-	@ManyToOne
-	@JoinColumn(name = "productId", nullable = false, insertable = false, updatable = false)
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 	
 	public ItemCart() {}
-		
-	public long getCartId() {
-		return cartId;
-	}
-
-	public void setCartId(long cartId) {
-		this.cartId = cartId;
-	}
-
-	public long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(long productId) {
-		this.productId = productId;
+	
+	public long getItemCartId() {
+		return this.itemCartId;
 	}
 
 	public int getAmount() {

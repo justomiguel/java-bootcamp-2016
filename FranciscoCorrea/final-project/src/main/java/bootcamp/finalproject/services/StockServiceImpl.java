@@ -1,5 +1,6 @@
 package bootcamp.finalproject.services;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,14 @@ public class StockServiceImpl implements StockService {
 	@Override
 	public Stock findByProductIdAndState(long productId, Enum<State> state) {
 		return stockRepository.findByProductProductIdAndState(productId, state);
+	}
+
+	@Override
+	public void addSoldStock(long productId, int amount) {
+		Stock stock = findByProductIdAndState(productId, Stock.State.SOLD);
+		int currentAmount = stock.getAmount();
+		stock.setAmount(amount + currentAmount);
+		stockRepository.saveAndFlush(stock);
 	}
 
 }

@@ -7,5 +7,6 @@ public interface StockService {
 	
 	boolean existsStock(long productId, int amount);
 	void recalculateStock(long productId, int amount, boolean subtraction);
+	void addSoldStock(long productId, int amount);
 	Stock findByProductIdAndState(long productId, Enum<State> state);
 }

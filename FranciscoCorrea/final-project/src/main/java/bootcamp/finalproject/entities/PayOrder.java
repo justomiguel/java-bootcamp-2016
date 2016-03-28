@@ -2,11 +2,15 @@ package bootcamp.finalproject.entities;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -18,6 +22,10 @@ public class PayOrder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long payOrderId;
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "cart_id")
+	private Cart cart;
+	
 	@Column(nullable = false)
 	private double price;
 	
@@ -28,11 +36,16 @@ public class PayOrder {
 	
 	protected PayOrder() {}
 	
-	public PayOrder(double price, Date orderDate) {
+	public PayOrder(Cart cart, double price, Date orderDate) {
+		this.cart = cart;
 		this.price = price;
 		this.orderDate = orderDate;
 	}
 
+	public Cart getCart() {
+		return cart;
+	}
+	
 	public long getPayOrderId() {
 		return payOrderId;
 	}

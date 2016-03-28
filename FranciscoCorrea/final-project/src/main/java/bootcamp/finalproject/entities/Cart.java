@@ -3,10 +3,12 @@ package bootcamp.finalproject.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +16,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -37,40 +42,16 @@ public class Cart {
 	@Column(nullable = false)
 	private CartStatus cartStatus;
 	
-	@OneToOne
-	@JoinColumn(name = "payorder_fk")
-	private PayOrder payOrder;
-	
-	@OneToMany(mappedBy = "cart")
+	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Set<ItemCart> products = new HashSet<ItemCart>();
 
-	protected Cart() {}
+	public Cart() {}
 	
 	public Cart(User user, CartStatus status) {
 		this.user = user;
 		this.cartStatus = status;
 	}
-	/*
-	public void addProduct(Product product, int amount) {
-		ItemCart itemCart = findProduct(product);
-		itemCart.setProduct(product);
-		itemCart.setCart(this);
-		itemCart.setCartId(this.getCartId());
-		itemCart.setProductId(product.getProductId());
-		itemCart.setAmount(amount);
-		em.persist(itemCart);
-		
-		this.products.add(itemCart);
-		product.getCart().add(itemCart);
-	}
-
-	public ItemCart getProduct(Product product) {
-		return null;
-	}
-
-	public void deleteProduct(Product product) {
-		
-	}*/
 
 	public long getCartId() {
 		return cartId;
@@ -80,12 +61,20 @@ public class Cart {
 		return user;
 	}
 	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	public Set<ItemCart> getProducts() {
 		return this.products;
 	}
-
-	public void setUser(User user) {
-		this.user = user;
+	
+	public void addItemcart(ItemCart itemCart) {
+		this.products.add(itemCart);
+	}
+	
+	public void deleteItemcart(ItemCart itemCart) {
+		this.products.remove(itemCart);
 	}
 
 	public CartStatus getCartStatus() {
@@ -94,14 +83,6 @@ public class Cart {
 
 	public void setCartStatus(CartStatus cartStatus) {
 		this.cartStatus = cartStatus;
-	}
-	
-	public PayOrder getPayOrder() {
-		return payOrder;
-	}
-
-	public void setPayOrder(PayOrder payOrder) {
-		this.payOrder = payOrder;
 	}
 	
 }

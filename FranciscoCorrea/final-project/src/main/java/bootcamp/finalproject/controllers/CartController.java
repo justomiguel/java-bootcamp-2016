@@ -1,13 +1,14 @@
 package bootcamp.finalproject.controllers;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,19 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import bootcamp.finalproject.entities.Cart;
 import bootcamp.finalproject.entities.ItemCart;
 import bootcamp.finalproject.entities.Product;
-import bootcamp.finalproject.entities.Stock;
-import bootcamp.finalproject.repositories.CartRepository;
-import bootcamp.finalproject.repositories.PayOrderRepository;
-import bootcamp.finalproject.repositories.ProductRepository;
-import bootcamp.finalproject.repositories.StockRepository;
-import bootcamp.finalproject.repositories.UserRepository;
 import bootcamp.finalproject.services.CartService;
 import bootcamp.finalproject.services.ProductService;
 import bootcamp.finalproject.services.StockService;
 
 @RequestMapping("/cart")
 @RestController
-public class CartController {/*
+public class CartController {
 
 	@Autowired CartService cartService;
 	@Autowired ProductService productService;
@@ -40,49 +35,47 @@ public class CartController {/*
 	public ResponseEntity<?> addProductToCart(
 			@RequestParam(name = "amount", defaultValue = "1" ) int amount,
 			@PathVariable long productId) {
-		if(!productRepository.findByProductId(productId).isPresent()) {
-			return new ResponseEntity<>("Product non-existent", HttpStatus.BAD_REQUEST);
+		if (!productService.findById(productId).isPresent()) {
+			return new ResponseEntity<>("Product non-existent", HttpStatus.UNPROCESSABLE_ENTITY);
 		}
-		if(!existsStock(productId, amount)) {
-			return new ResponseEntity<>("Amount exceeds stock", HttpStatus.BAD_REQUEST);
+		if(!stockService.existsStock(productId, amount)) {
+			return new ResponseEntity<>("Amount exceeds stock", HttpStatus.NOT_FOUND);
 		}
 		
-		Cart cart = getCart();
-		Product productToAdd = productRepository.findByProductId(productId).get();
-
+		Cart cart = cartService.getCart();		
+		Product productToAdd = productService.findById(productId).get();
 		try {
-			cart.addProduct(productToAdd, amount);
-			recalculateStock(productId, amount, true);
-			cartRepository.save(cart);
-		} catch (Exception e) {
-			return new ResponseEntity<>(e, HttpStatus.NOT_FOUND);
+		cartService.addProduct(cart, productToAdd, amount);
+		stockService.recalculateStock(productId, amount, true);
+		cartService.saveCart(cart);} catch (Exception e) {
+			return new ResponseEntity<>(e, HttpStatus.OK);
 		}
 		
 		
-		return new ResponseEntity<>("Veremos", HttpStatus.OK);
+		return new ResponseEntity<>("Product(s) added to Cart", HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.DELETE) 
 	public ResponseEntity<?> deleteProductFromCart(@PathVariable long productId) {
-		if(!productRepository.findByProductId(productId).isPresent()) {
-			return new ResponseEntity<>("Product non-existent", HttpStatus.BAD_REQUEST);
+		if(!productService.findById(productId).isPresent()) {
+			return new ResponseEntity<>("Product non-existent", HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
-		Product productToDelete = productRepository.findByProductId(productId).get();
-		Cart cart = getCart();
-		int amountToAdd = cart.getProduct(productToDelete).getAmount();
-		recalculateStock(productId, amountToAdd, false);
-		cart.deleteProduct(productToDelete);
-		cartRepository.save(cart);
-		return new ResponseEntity<>("Product deleted from cart", HttpStatus.NO_CONTENT);
+		Product productToDelete = productService.findById(productId).get();
+		Cart cart = cartService.getCart();		
+		int amountToAdd = cartService.findProduct(cart, productToDelete).getAmount();
+		stockService.recalculateStock(productId, amountToAdd, false);
+		cartService.deleteProduct(cart, productToDelete);
+
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+	/*
 	@RequestMapping(value = "/products/{productId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> subtractAmount(
 			@PathVariable long productId,
 			@RequestParam(name = "amount", defaultValue = "0") int amount) {
-		if(!productRepository.findByProductId(productId).isPresent()) {
-			return new ResponseEntity<>("Product non-existent", HttpStatus.BAD_REQUEST);
+		if(!productService.findById(productId).isPresent()) {
+			return new ResponseEntity<>("Product non-existent", HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
 		Product productToSubtractAmount = productRepository.findByProductId(productId).get();
@@ -96,11 +89,22 @@ public class CartController {/*
 		cartRepository.save(cart);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
+	}*/
 
 	@RequestMapping(method = RequestMethod.GET)
 	public Set<ItemCart> seeCart() {
-		Cart cart = cartService.getCart();
-		return cart.getProducts();
+		return cartService.getCart().getProducts();
 	}
-*/}
+	
+	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
+	public ResponseEntity<?> checkout() {
+		Cart cart = cartService.getCart();
+		try {
+			cartService.checkout(cart);
+			return new ResponseEntity<>("Fine", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+}

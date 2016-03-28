@@ -42,7 +42,10 @@ public class Application {
 			productRepository.save(new Product("Notebook", 6500.50, b));
 			
 			productRepository.findAll().forEach(
-					pro -> stockRepository.save(new Stock(pro, Stock.State.PUBLISHED, 15))
+					pro -> { 
+						stockRepository.save(new Stock(pro, Stock.State.PUBLISHED, 15));
+						stockRepository.save(new Stock(pro, Stock.State.SOLD, 0));
+						}
 				);
 			
 		};

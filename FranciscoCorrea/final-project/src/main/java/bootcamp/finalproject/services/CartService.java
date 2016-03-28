@@ -10,19 +10,19 @@ import bootcamp.finalproject.entities.Product;
 
 public interface CartService {
 	
-	Cart getCart();
-	
-	Cart saveCart(Cart cart);
+	Cart getCart(); 
 	
 	Optional<Cart> findByNickNameAndStatus(String nickName, Enum<CartStatus> status);
 	
-	Set<ItemCart> showCart();
+	Cart saveCart(Cart cart);
 	
-	ItemCart findProduct(Product product);
+	Set<ItemCart> showCart(Cart cart);
 	
-	ItemCart addProduct(Product product, int amount);
+	ItemCart findProduct(Cart cart, Product product);
 	
-	void deleteProduct(Product product);
+	void addProduct(Cart cart, Product product, int amount);
 	
-	Cart checkout();
+	void deleteProduct(Cart cart, Product product);
+	
+	void checkout(Cart cart);
 }
