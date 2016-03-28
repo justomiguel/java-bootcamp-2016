@@ -17,30 +17,41 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "Product Entity", description = "Products published for add to cart")
 @Entity
 @Table(name = "product")
 public class Product {
 	
+	@ApiModelProperty(value = "Product's Id", required = true) 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long productId;
 	
+	@ApiModelProperty(value = "Name of the product", required = true)
 	@Column(nullable = false, length = 50)
 	private String name;
+	
+	@ApiModelProperty(value = "Product description", required = false)
 	private String description;
 	
+	@ApiModelProperty(value = "Price of the product", required = true)
 	@Column(nullable = false)
 	private double price;
 	
+	@ApiModelProperty(value = "Category of the product", required = true)
 	@ManyToOne
 	@JoinColumn(name = "category_fk", nullable = false)
 	private Category category;
 	
+	@ApiModelProperty(value = "Stock of the product", required= true)
 	@JsonIgnore
 	@OneToMany(mappedBy = "product")
 	private List<Stock> stocks;
 	
+	@ApiModelProperty(value = "Carts that the product belongs", required = false)
 	@JsonIgnore
 	@OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
 	private Set<ItemCart> cart = new HashSet<ItemCart>();

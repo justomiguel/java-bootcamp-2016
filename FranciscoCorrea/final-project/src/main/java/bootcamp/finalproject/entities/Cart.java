@@ -15,13 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "Shopping Cart Entity", description = "Cart that stores products for the user purchase")
 @Entity
 @Table(name = "cart")
 public class Cart {
@@ -30,18 +31,22 @@ public class Cart {
 		CHECKOUT, CURRENT
 	}
 	
+	@ApiModelProperty(value = "Cart Id", required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long cartId;
 	
+	@ApiModelProperty(value = "User owner of the cart", required = true)
 	@ManyToOne
 	@JoinColumn(name = "user_fk", nullable = false)
 	private User user;
 	
+	@ApiModelProperty(value = "Cart's Status", required = true, example = "CURRENT")
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
 	private CartStatus cartStatus;
 	
+	@ApiModelProperty(value = "Products stores in the cart", required = false)
 	@OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonManagedReference
 	private Set<ItemCart> products = new HashSet<ItemCart>();

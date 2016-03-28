@@ -11,30 +11,47 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "User Entity", description = "Model for stores the users in the API")
 @Entity
 @Table(name = "user")
 public class User {
 
+	@ApiModelProperty(value = "User Id", required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long userId;
 	
+	@ApiModelProperty(value = "Username or nickname of the user", required = true)
 	@Column(nullable = false, unique = true, length = 25)
 	private String nickName;
 	
+	@ApiModelProperty(value = "Password of the user", required = true)
 	@Column(nullable = false, length = 70)
 	private String password;
-	@Column(length = 50) private String firstName;
-	@Column(length = 50) private String lastName;
+	
+	@ApiModelProperty(value = "First Name of the user", required = false)
+	@Column(length = 50)
+	private String firstName;
+	
+	@ApiModelProperty(value = "Last name of the user", required = false)
+	@Column(length = 50)
+	private String lastName;
+	
+	@ApiModelProperty(value = "Phone of the user", required = false)
 	private String phone;
 	
+	@ApiModelProperty(value = "Email of the user", required = true)
 	@Column(nullable = false)
 	private String email;
 	
+	@ApiModelProperty(value = "Adresses of the user", required = true)
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<Address> adreesses;
 	
+	@ApiModelProperty(value = "Carts belonging to the user", required = false)
 	@OneToMany(mappedBy = "user")
 	private Set<Cart> carts;
 	

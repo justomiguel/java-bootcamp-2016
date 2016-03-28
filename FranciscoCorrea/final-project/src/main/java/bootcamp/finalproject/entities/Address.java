@@ -11,25 +11,37 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Address Entity", description = "Address for a User")
 @Entity
 @Table(name = "address")
 public class Address {
 
+	@ApiModelProperty(value = "Address's Id", required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long addressId;
 	
-	@JsonIgnore /*why?*/
+	@ApiModelProperty(value = "User who has the address", required = true)
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_fk", nullable = false)
 	private User user;
 	
+	@ApiModelProperty(value = "Street where lives the customer", required = true, example = "Av. Marconi")
 	@Column(nullable = false)
 	private String street;
 	
+	@ApiModelProperty(value = "Number of the Street", required = true, example = "505")
 	@Column(nullable = false)
 	private String streetNumber;
+	
+	@ApiModelProperty(value = "City where lives the customer", required = false, example = "Resistencia")
 	private String city;
+	
+	@ApiModelProperty(value = "Zip Code of the city", required = false, example = "3500")
 	private int zipCode;
 	
 	protected Address() {}

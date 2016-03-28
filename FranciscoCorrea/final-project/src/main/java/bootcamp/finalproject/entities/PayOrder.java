@@ -13,25 +13,34 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+
+@ApiModel(value = "Pay Order Entity", description = "Pay Order belonging to a purchase of cart")
 @Entity
 @Table(name = "pay_order")
 public class PayOrder {
 	
+	@ApiModelProperty(value = "Pay Order Id", required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long payOrderId;
 	
+	@ApiModelProperty(value = "Cart purchased", required = true)
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "cart_id")
 	private Cart cart;
 	
+	@ApiModelProperty(value = "Price of the purchased cart", required = true)
 	@Column(nullable = false)
 	private double price;
 	
+	@ApiModelProperty(value = "Date of the purchase of the cart", required = true)
 	@Column(nullable = false)
 	private Date orderDate;
 	
+	@ApiModelProperty(value = "Payment Date", required = false)
 	private Date paidDate;
 	
 	protected PayOrder() {}

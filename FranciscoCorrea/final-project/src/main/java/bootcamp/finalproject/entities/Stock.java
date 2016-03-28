@@ -11,7 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(value = "Stock Entity", description = "Stock for every product")
 @Entity
 @Table(name = "stock")
 public class Stock {
@@ -20,18 +23,22 @@ public class Stock {
 		PUBLISHED, SOLD
 	}
 	
+	@ApiModelProperty(value = "Stock Id", required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long stockId;
 	
+	@ApiModelProperty(value = "Product's Stock", required = true)
 	@ManyToOne
 	@JoinColumn(name = "product_fk", nullable = false)
 	private Product product;
 	
+	@ApiModelProperty(value = "State of the current Stock", required = true)
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
 	private State state;
 	
+	@ApiModelProperty(value = "Amount of the product", required = true)
 	@Column(nullable = false)
 	private int amount;
 	

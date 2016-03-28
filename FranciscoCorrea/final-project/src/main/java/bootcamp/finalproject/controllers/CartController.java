@@ -1,9 +1,6 @@
 package bootcamp.finalproject.controllers;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,27 +66,6 @@ public class CartController {
 
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	/*
-	@RequestMapping(value = "/products/{productId}", method = RequestMethod.PUT)
-	public ResponseEntity<?> subtractAmount(
-			@PathVariable long productId,
-			@RequestParam(name = "amount", defaultValue = "0") int amount) {
-		if(!productService.findById(productId).isPresent()) {
-			return new ResponseEntity<>("Product non-existent", HttpStatus.UNPROCESSABLE_ENTITY);
-		}
-		
-		Product productToSubtractAmount = productRepository.findByProductId(productId).get();
-		Cart cart = getCart();
-		int amountToUpdate = cart.getProduct(productToSubtractAmount).getAmount();
-		if(!(amountToUpdate - amount >= 0)) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-		recalculateStock(productId, amount, false);
-		cart.getProduct(productToSubtractAmount).setAmount(amountToUpdate - amount);
-		cartRepository.save(cart);
-		
-		return new ResponseEntity<>(HttpStatus.OK);
-	}*/
 
 	@RequestMapping(method = RequestMethod.GET)
 	public Set<ItemCart> seeCart() {
