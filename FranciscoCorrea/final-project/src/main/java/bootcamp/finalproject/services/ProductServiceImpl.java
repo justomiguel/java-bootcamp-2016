@@ -13,8 +13,7 @@ import bootcamp.finalproject.repositories.ProductRepository;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	@Autowired
-	ProductRepository productRepository;
+	@Autowired ProductRepository productRepository;
 	
 	@Override
 	public Product saveProduct(Product product) {
@@ -49,6 +48,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> findByCategoryName(String category) {
 		return productRepository.findByCategoryName(category);
+	}
+
+	@Override
+	public List<Product> findAll() {
+		return productRepository.findAll();
 	}
 
 }
