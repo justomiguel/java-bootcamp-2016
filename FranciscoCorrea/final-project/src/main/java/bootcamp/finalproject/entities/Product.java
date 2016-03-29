@@ -1,5 +1,6 @@
 package bootcamp.finalproject.entities;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -38,8 +41,10 @@ public class Product {
 	private String description;
 	
 	@ApiModelProperty(value = "Price of the product", required = true)
+	@JsonSerialize(using = PriceSerializer.class)
+	@JsonDeserialize(using = PriceDeserializer.class)
 	@Column(nullable = false)
-	private double price;
+	private BigDecimal price;
 	
 	@ApiModelProperty(value = "Category of the product", required = true)
 	@ManyToOne
@@ -55,15 +60,15 @@ public class Product {
 	@JsonIgnore
 	@OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
 	private Set<ItemCart> cart = new HashSet<ItemCart>();
-
+	
 	protected Product() {}
 	
-	public Product(String name, double price) {
+	public Product(String name, BigDecimal price) {
 		this.name = name;
 		this.price = price;
 	}
 	
-	public Product(String name, double price, Category category) {
+	public Product(String name, BigDecimal price, Category category) {
 		this.name = name;
 		this.price = price;
 		this.category = category;
@@ -97,11 +102,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

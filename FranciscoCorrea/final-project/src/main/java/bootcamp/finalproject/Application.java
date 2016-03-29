@@ -1,5 +1,7 @@
 package bootcamp.finalproject;
 
+import java.math.BigDecimal;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,9 +39,9 @@ public class Application {
 			a = categoryRepository.findOne((long)1);
 			b = categoryRepository.findOne((long)2);
 			
-			productRepository.save(new Product("Cama", 1500, a));
-			productRepository.save(new Product("Silla", 450.25, a));
-			productRepository.save(new Product("Notebook", 6500.50, b));
+			productRepository.save(new Product("Cama", new BigDecimal(1500.00), a));
+			productRepository.save(new Product("Silla", new BigDecimal(450.25), a));
+			productRepository.save(new Product("Notebook", new BigDecimal(6500.50), b));
 			
 			productRepository.findAll().forEach(
 					pro -> { 

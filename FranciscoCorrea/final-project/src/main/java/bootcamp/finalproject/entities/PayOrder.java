@@ -1,5 +1,6 @@
 package bootcamp.finalproject.entities;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -34,7 +38,9 @@ public class PayOrder {
 	
 	@ApiModelProperty(value = "Price of the purchased cart", required = true)
 	@Column(nullable = false)
-	private double price;
+	@JsonSerialize(using = PriceSerializer.class)
+	@JsonDeserialize(using = PriceDeserializer.class)
+	private BigDecimal price;
 	
 	@ApiModelProperty(value = "Date of the purchase of the cart", required = true)
 	@Column(nullable = false)
@@ -45,7 +51,7 @@ public class PayOrder {
 	
 	protected PayOrder() {}
 	
-	public PayOrder(Cart cart, double price, Date orderDate) {
+	public PayOrder(Cart cart, BigDecimal price, Date orderDate) {
 		this.cart = cart;
 		this.price = price;
 		this.orderDate = orderDate;
@@ -59,11 +65,11 @@ public class PayOrder {
 		return payOrderId;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

@@ -1,5 +1,6 @@
 package bootcamp.finalproject.services;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -83,23 +84,21 @@ public class CartServiceImpl implements CartService {
 		ItemCart itemCart = findProduct(cart, product);
 		cart.deleteItemcart(itemCart);
 		saveCart(cart);
-		itemCartRepository.delete(itemCart); // No debería ser así
+		itemCartRepository.delete(itemCart); /* Find another solution */
 	}
 
 	@Override
 	public void checkout(Cart cart) {
-		double price = 0;
+		BigDecimal price = new BigDecimal(0);
 		for (ItemCart itemCart : cart.getProducts()) {
 			int amount = itemCart.getAmount();
 			stockService.addSoldStock(itemCart.getProduct().getProductId(), amount);
-			price = price + itemCart.getProduct().getPrice()*amount;
+			price = price.add(itemCart.getProduct().getPrice()).multiply(new BigDecimal(amount));
 		}
 		
 		Date date = Date.valueOf("2016-03-28");
 		PayOrder payOrder = new PayOrder(cart, price, date);
-		
 		payOrderService.savePayOrder(payOrder);
-		
 		cart.setCartStatus(Cart.CartStatus.CHECKOUT);
 		saveCart(cart);
 	}
