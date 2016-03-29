@@ -15,7 +15,7 @@ import finalproject.entity.User;
 import finalproject.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @Api(value = "user", produces = "application/json")
 public class UserController {
 
@@ -38,10 +38,10 @@ public class UserController {
 
 	}
 	
-	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
+	@RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
 	@ApiOperation(value = "find user")
 	@ApiResponse(code = 200, message = "user was finded successfully")
-	public User findByUsername(String username){
+	public User findByUsername(@PathVariable String username){
 		return userService.findByUsername(username);
 		
 		

@@ -47,6 +47,8 @@ public class FinalProjectTest {
 	PurchaseController purchaseController;
 
 	private User user;
+	
+	private User user2;
 
 	private Cart cart;
 
@@ -68,6 +70,14 @@ public class FinalProjectTest {
 		user.setUsername("chicho2000");
 
 		user = userController.createUser(user);
+		
+		user2 = new User();
+		user2.setLastname("Chichi");
+		user2.setName("Carlos");
+		user2.setPassword("123123");
+		user2.setUsername("chicho9999");
+
+		user2 = userController.createUser(user2);
 		
 		//after login cart Created
 		cart = new Cart();

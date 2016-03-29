@@ -18,7 +18,7 @@ import finalproject.service.CategoryService;
 import finalproject.service.ProductService;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/api/cart")
 @Api(value = "productController")
 public class ProductController {
 

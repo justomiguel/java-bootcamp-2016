@@ -14,43 +14,43 @@ import org.springframework.web.bind.annotation.RestController;
 import finalproject.entity.Purchase;
 import finalproject.service.PurchaseService;
 
-
 @RestController
-@RequestMapping("/cart/pucharse")
-@Api(value = "pucharseController")
+@RequestMapping("/api/cart/purchase")
+@Api(value = "purchaseController")
 public class PurchaseController {
-	
+
 	@Autowired
-	PurchaseService pucharseService;
+	PurchaseService purchaseService;
 
 	@RequestMapping(value = "/{idCart}", method = RequestMethod.POST)
 	@ApiOperation(value = "calculate the total ")
-	public double calcularTotal(@PathVariable long idCart){
-		return pucharseService.calcularTotal(idCart);
-		
+	public double calcularTotal(@PathVariable long idCart) {
+		return purchaseService.calcularTotal(idCart);
+
 	}
 
 	@RequestMapping(value = "/{idCart}", method = RequestMethod.GET)
 	@ApiOperation(value = "detail of the shopping")
-	public String detalleCompra(@PathVariable long idCart){
-		return pucharseService.detalleCompra(idCart);
-		
+	public String detalleCompra(@PathVariable long idCart) {
+		return purchaseService.detalleCompra(idCart);
+
 	}
-	
-	@RequestMapping(value = "/", method = RequestMethod.POST,produces = "application/json")
+
+	@RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json")
 	@ApiOperation(value = "create a purchse")
 	@ApiResponse(code = 200, message = "purchse was created successfully")
 	public Purchase createPurchase(@RequestBody Purchase purchase) {
 		// TODO Auto-generated method stub
-		return pucharseService.persistPurchase(purchase);
+		return purchaseService.persistPurchase(purchase);
 	}
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE,produces = "application/json")
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	@ApiOperation(value = "delete a purchse")
 	@ApiResponse(code = 200, message = "purchse was deleted successfully")
 	public void deletePurchse(@PathVariable long id) {
 		// TODO Auto-generated method stub
-		pucharseService.removeById(id);
-		
+		purchaseService.removeById(id);
+
 	}
 
 }
