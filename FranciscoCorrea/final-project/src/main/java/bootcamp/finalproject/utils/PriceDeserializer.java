@@ -1,4 +1,4 @@
-package bootcamp.finalproject.entities;
+package bootcamp.finalproject.utils;
 
 
 import com.fasterxml.jackson.core.JsonParser;

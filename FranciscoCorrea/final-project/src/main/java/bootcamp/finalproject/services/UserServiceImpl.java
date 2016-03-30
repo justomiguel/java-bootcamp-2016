@@ -1,5 +1,6 @@
 package bootcamp.finalproject.services;
 
+import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByNickName(String nickName) {
 		return userRepository.findByNickName(nickName);
+	}
+
+	@Override
+	public boolean isValid(User user) {
+		if(userRepository.findByNickName(user.getNickName()) == null 
+				&& EmailValidator.getInstance().isValid(user.getEmail())) {
+			return true;
+		}
+		return false;
 	}
 
 }

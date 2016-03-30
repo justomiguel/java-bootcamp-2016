@@ -11,7 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import bootcamp.finalproject.entities.Category;
 import bootcamp.finalproject.entities.Product;
 import bootcamp.finalproject.entities.Stock;
-import bootcamp.finalproject.entities.User;
 import bootcamp.finalproject.repositories.CategoryRepository;
 import bootcamp.finalproject.repositories.ProductRepository;
 import bootcamp.finalproject.repositories.StockRepository;
@@ -30,14 +29,9 @@ public class Application {
 			CategoryRepository categoryRepository, UserRepository userRepository,
 			StockRepository stockRepository) {
 		return (clr) -> {
-			userRepository.save(new User("Tato", "encryptedpass", "email@email.tv"));
-			
 			Category a, b;
-			categoryRepository.save(new Category("Muebles", "Muebles de madera"));
-			categoryRepository.save(new Category("Computación", "Articulos de computación"));
-			
-			a = categoryRepository.findOne((long)1);
-			b = categoryRepository.findOne((long)2);
+			a = categoryRepository.save(new Category("Muebles", "Muebles de madera"));
+			b = categoryRepository.save(new Category("Computación", "Articulos de computación"));
 			
 			productRepository.save(new Product("Cama", new BigDecimal(1500.00), a));
 			productRepository.save(new Product("Silla", new BigDecimal(450.25), a));
